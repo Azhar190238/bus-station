@@ -78,7 +78,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="hidden lg:flex items-center text-[18px] font-medium text-[#030712]  space-x-10">
+        <div className="hidden lg:flex items-center text-[18px] font-medium text-[#030712]   space-x-10">
           {renderLinks()}
         </div>
 
@@ -94,7 +94,7 @@ const Navbar = () => {
       <div className="h-[1px] mt-2 w-full relative  bg-gray-500"></div>
 
       {isOpen && (
-        <div className="lg:hidden absolute top-28 left-0 w-full z-50 flex flex-col text-[18px] font-medium px-4 space-y-4">
+        <div className="lg:hidden absolute top-28 left-0 w-1/3 z-50 flex flex-col text-[18px] bg-primary font-medium px-4 space-y-4">
           {renderLinks(true)}
         </div>
       )}

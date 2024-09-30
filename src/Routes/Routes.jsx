@@ -6,12 +6,11 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Authentication/Login/Login";
 import SignUp from "../Authentication/SignUp/SignUp";
-import Service from "../Pages/Service/Service";
 import ContactPage from "../Pages/Contact/ContactPage";
 import About from "../Pages/About/About";
 import AllFaq from "../Pages/FAQ/AllFaq";
 // import Register from "../Authentication/Register";
-// import Dashboard from "../Layout/Dashboard";
+import Dashboard from "../Layout/Dashboard";
 // import PrivateRoute from "../Providers/PrivateRoute"
 // import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 // import AddCamp from "../Pages/Dashboard/AddCamp/AddCamp";
@@ -20,7 +19,8 @@ import AllFaq from "../Pages/FAQ/AllFaq";
 // import ManageCamp from "../Pages/Dashboard/ManageCamp/ManageCamp";
 // import ManageRegisteredCamp from "../Pages/Dashboard/ManageRegisteredCamp/ManageRegisteredCamp";
 // import UpdateCamp from "../Pages/Dashboard/UpdateCamp/UpdateCamp";
-// import Profile from "../Pages/Dashboard/Profile/Profile";
+import Profile from "../Pages/Dashboard/Profile/Profile";
+import AllService from "../Pages/Service/AllService";
 // import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
 // import RegisteredCamp from "../Pages/Dashboard/RegisteredCamp/RegisteredCamp";
 // import Payment from "../Pages/Dashboard/Payment/Payment";
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/service',
-        element: <Service/>
+        element: <AllService/>
       },
       {
         path: '/faq',
@@ -75,17 +75,18 @@ export const router = createBrowserRouter([
       // }
     ]
   },
-  // {
-  //   path: 'dashboard',
-  //   element:  <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
-  //   // element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-  //   children: [
-  //     // general user can access
+  {
+    path: 'dashboard',
+    // element:  <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
+    element: <Dashboard></Dashboard>,
+    children: [
+      // general user can access
       
-  //     {
-  //       path: 'profile',
-  //       element: <PrivateRoute> <Profile></Profile> </PrivateRoute>
-  //     },
+      {
+        path: 'profile',
+        // element: <PrivateRoute> <Profile></Profile> </PrivateRoute>
+        element:  <Profile></Profile> 
+      },
   //     {
   //       path: 'registeredCamp',
   //       element: <PrivateRoute> <RegisteredCamp></RegisteredCamp> </PrivateRoute>
@@ -138,6 +139,6 @@ export const router = createBrowserRouter([
   //       element: <UpdateProfile></UpdateProfile>,
   //       loader: ({params}) => fetch(`https://server-site-lilac.vercel.app/updateProfile/${params.email}`)
   //     }
-  //   ]
-  // }
+   ]
+   }
 ]);

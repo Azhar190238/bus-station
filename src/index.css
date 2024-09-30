@@ -268,9 +268,21 @@
       .swiper-button-prev,
       .swiper-button-next {
         width: 35px;
-        height: 35px;
-        padding: 10px; 
+        height: 35px; 
+        padding: 10px;
+ 
+
       }
+      .swiper-button-prev:after, 
+      .swiper-button-next:after {
+        font-size: 16px;
+      }
+      .swiper-button-prev, 
+      .swiper-rtl .swiper-button-prev {
+        right: 55px;
+        left: auto;
+      }
+
   
       .swiper-pagination {
         margin-top: 5px; 
@@ -278,4 +290,33 @@
 
     }
   }
+
+
+  /* for ticket  */
+
+  .ticket-header{
+    @apply text-xl md:text-2xl capitalize font-semibold text-[#030712] border-dashed border-b border-black py-5
+}
+.seat{
+    @apply bg-[#E675291A] border border-primary h-10 w-14 md:h-10 md:w-20 lg:h-20 lg:w-40 rounded-md flex items-center justify-center
+}
+.seat-text{
+    @apply text-[#E67529] text-[16px] lg:text-2xl font-extrabold
+}
+.select-seat{
+    @apply bg-[#E675291A] border border-primary h-12 w-28 md:h-16 md:w-32  lg:h-20 lg:w-56 rounded-md flex items-center justify-center text-[#E67529] text-[16px] lg:text-2xl font-extrabold
+}
   
+
+/* dropdown */
+.custom-select {
+    appearance: none; /* Remove default styling */
+    background: url('src/assets/arrow.svg') no-repeat right  5px center; /* Add your custom arrow */
+    background-size: 20px; /* Adjust size of the arrow */
+    padding-right: 30px; 
+    font-size: medium;
+  }
+  
+  .custom-select:hover {
+    cursor: pointer; /* Change cursor on hover */
+  }

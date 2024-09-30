@@ -1,13 +1,14 @@
-import BasicHeader from "../../Shared-file/SectionHeader";
+
 import { LuBus } from "react-icons/lu";
 import { TbArmchair } from "react-icons/tb";
 import { TbCoinTakaFilled } from "react-icons/tb";
+import SectionHeader from "../../Shared-file/SectionHeader";
 
 
 const LatestBus = () => {
     return (
         <section className="bus-container">
-            <BasicHeader
+            <SectionHeader
                 heading="Latest Bus Service"
                 description="The latest Koyra to Dhaka bus offers comfortable seating, air conditioning, and Wi-Fi, ensuring a smooth ride with daily departures for all travelers!"
             />

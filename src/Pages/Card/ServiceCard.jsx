@@ -13,8 +13,6 @@ const ServiceCard = ({ img, restTime, availableSeat }) => {
                     <p className='card-description py-4 text-center mx-auto'>Available Seat: {availableSeat}</p>
                 </div>
                 <button className='button w-full'>Buy Ticket</button>
-                <h1>azhar</h1>
-                <h6>azhar</h6>
             </div>
         </div>
     );
