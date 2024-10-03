@@ -1,147 +1,217 @@
-/* eslint-disable react/prop-types */
-import { useContext } from "react";
-import { AuthContext } from "../../../Providers/AuthProvider";
-import useAxios from "../../../Hooks/useAxios";
-import { useQuery } from "@tanstack/react-query";
-import { FaUsers } from "react-icons/fa";
-import { MdPayment } from "react-icons/md";
-import { CiMedicalCase } from "react-icons/ci";
-import { FaHouseMedicalCircleCheck } from "react-icons/fa6";
+// /* eslint-disable react/prop-types */
+// import { useContext } from "react";
+// import { AuthContext } from "../../../Providers/AuthProvider";
+// import useAxios from "../../../Hooks/useAxios";
+// import { useQuery } from "@tanstack/react-query";
+// import { FaUsers } from "react-icons/fa";
+// import { MdPayment } from "react-icons/md";
+// import { CiMedicalCase } from "react-icons/ci";
+// import { FaHouseMedicalCircleCheck } from "react-icons/fa6";
 
 
 
 
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
 
-const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
-// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+// import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+
+// const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
+// // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+// const AdminHome = () => {
+//     const axiosSecure = useAxios()
+//     const { user } = useContext(AuthContext);
+
+//     const { data: currentUser = [] } = useQuery({
+//         queryKey: ['users'],
+//         queryFn: async () => {
+//             const res = await axiosSecure.get(`/currentUser?email=${user?.email}`)
+//             return res.data;
+//         }
+//     })
+//     console.log(user);
+//     console.log(currentUser[0]?.name);
+
+//     const { data: information = [] } = useQuery({
+//         queryKey: ['admin-states'],
+//         queryFn: async () => {
+//             const info = await axiosSecure.get('/admin-states')
+//             return info.data;
+//         }
+//     })
+//     console.log(information);
+
+
+//     //customize ber chart
+//     const getPath = (x, y, width, height) => {
+//         return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}
+//         ${x + width / 2}, ${y}
+//         C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${x + width}, ${y + height}
+//         Z`;
+//     };
+
+//     const data = [
+//         {
+//             name: 'Users',
+//             uv: information.users,
+//             pv: 2,
+//             amt: 8,
+//         },
+//         {
+//             name: 'Camp',
+//             uv: information.camps,
+//             pv: 7,
+//             amt: 6,
+//         },
+//         {
+//             name: 'RegisteredCamp',
+//             uv: information.registeredCamps,
+//             pv: 9,
+//             amt: 2,
+//         },
+//         {
+//             name: 'Payments',
+//             uv: information.payments,
+//             pv: 3,
+//             amt: 2,
+//         },
+//     ];
+
+//     const TriangleBar = (props) => {
+//         const { fill, x, y, width, height } = props;
+
+//         return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+//     };
+
+
+
+//     return (
+//         <div className="m-10">
+//             <h2 className="text-4xl">
+//                 <span> Welcome </span>
+//                 <span className="text-blue-600">
+//                     {
+//                         currentUser[0]?.name ? currentUser[0].name : 'Back'
+//                     }
+//                 </span>
+//                 <span> to Analytics</span>
+//             </h2>
+//             <div>
+//                 <div className="flex gap-4 justify-center mt-8">
+//                     <div className="stat border border-lime-800 rounded-2xl mx-auto">
+//                         <div className="stat-title text-center"> Total Users</div>
+//                         <div className="stat-value text-primary flex gap-3 mx-auto"><FaUsers></FaUsers>{information?.users}</div>
+//                         <div className="stat-desc text-center">21% more than last month</div>
+//                     </div>
+//                     <div className="stat border border-lime-800 rounded-2xl  mx-auto">
+//                         <div className="stat-title text-center"> Total Camp</div>
+//                         <div className="stat-value text-primary flex gap-3 mx-auto"><CiMedicalCase></CiMedicalCase> {information?.camps}</div>
+//                         <div className="stat-desc text-center">21% more than last month</div>
+//                     </div>
+//                     <div className="stat border border-lime-800 rounded-2xl  mx-auto">
+//                         <div className="stat-title text-center"> Total Registered Camp</div>
+//                         <div className="stat-value text-primary flex gap-3 mx-auto items-center"><FaHouseMedicalCircleCheck></FaHouseMedicalCircleCheck> {information?.registeredCamps}</div>
+//                         <div className="stat-desc text-center">21% more than last month</div>
+//                     </div>
+//                     <div className="stat border border-lime-800 rounded-2xl mx-auto">
+//                         <div className="stat-title text-center"> Total Payments</div>
+//                         <div className="stat-value text-primary flex gap-3 mx-auto items-center"><MdPayment></MdPayment> {information?.payments}</div>
+//                         <div className="stat-desc text-center">21% more than last month</div>
+//                     </div>
+//                 </div>
+//             </div>
+//             <div className="flex w-full justify-center mt-4">
+//                 <div className="w-full">
+//                     <BarChart
+//                         width={900}
+//                         height={500}
+//                         data={data}
+//                         margin={{
+//                             top: 20,
+//                             right: 30,
+//                             left: 20,
+//                             bottom: 5,
+//                         }}
+//                     >
+//                         <CartesianGrid strokeDasharray="3 3" />
+//                         <XAxis dataKey="name" />
+//                         <YAxis />
+//                         <Bar dataKey="uv" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
+//                             {data.map((entry, index) => (
+//                                 <Cell key={`cell-${index}`} fill={colors[index % 4]} />
+//                             ))}
+//                         </Bar>
+//                     </BarChart>
+//                 </div>
+
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default AdminHome;
+
+
+import { useEffect, useState } from "react";
+import { FaBus, FaUserAstronaut, FaUsers } from "react-icons/fa";
+import { GiPoliceOfficerHead } from "react-icons/gi";
 
 const AdminHome = () => {
-    const axiosSecure = useAxios()
-    const { user } = useContext(AuthContext);
+    const [totalUsers, setTotalUsers] = useState(0);
+    const [mastersCount, setMastersCount] = useState(0);
+    const [normalUsersCount, setNormalUsersCount] = useState(0);
 
-    const { data: currentUser = [] } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/currentUser?email=${user?.email}`)
-            return res.data;
-        }
-    })
-    console.log(user);
-    console.log(currentUser[0]?.name);
+    // Fetch total users and filter based on role when the component mounts
+    useEffect(() => {
+        fetch('http://localhost:5000/users')
+            .then((response) => response.json())
+            .then((data) => {
+                const allUsers = data.length;
+                const masters = data.filter(user => user.role === 'master').length;
+                const normalUsers = data.filter(user => user.role === 'member').length;
 
-    const { data: information = [] } = useQuery({
-        queryKey: ['admin-states'],
-        queryFn: async () => {
-            const info = await axiosSecure.get('/admin-states')
-            return info.data;
-        }
-    })
-    console.log(information);
+                setTotalUsers(allUsers);
+                setMastersCount(masters);
+                setNormalUsersCount(normalUsers);
+            })
+            .catch((error) => console.error("Error fetching users:", error));
+    }, []);
 
-
-    //customize ber chart
-    const getPath = (x, y, width, height) => {
-        return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}
-        ${x + width / 2}, ${y}
-        C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${x + width}, ${y + height}
-        Z`;
-    };
-
-    const data = [
+    const dashboardItems = [
         {
-            name: 'Users',
-            uv: information.users,
-            pv: 2,
-            amt: 8,
+            icon: FaUsers,
+            count: totalUsers,
+            text: 'Total Number of All Users',
         },
         {
-            name: 'Camp',
-            uv: information.camps,
-            pv: 7,
-            amt: 6,
+            icon: GiPoliceOfficerHead,
+            count: mastersCount,
+            text: 'Number of Counter Masters',
         },
         {
-            name: 'RegisteredCamp',
-            uv: information.registeredCamps,
-            pv: 9,
-            amt: 2,
+            icon: FaUserAstronaut,
+            count: normalUsersCount,
+            text: 'Total Number of Normal Users',
         },
         {
-            name: 'Payments',
-            uv: information.payments,
-            pv: 3,
-            amt: 2,
+            icon: FaBus,
+            count: 0, // Add logic for bus count here
+            text: 'Total Number of Buses',
         },
     ];
 
-    const TriangleBar = (props) => {
-        const { fill, x, y, width, height } = props;
-
-        return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-    };
-
-  
-    
     return (
-        <div className="m-10">
-            <h2 className="text-4xl">
-                <span> Welcome </span>
-                <span className="text-blue-600">
-                    {
-                        currentUser[0]?.name ? currentUser[0].name : 'Back'
-                    }
-                </span>
-                <span> to Analytics</span>
-            </h2>
-            <div>
-                <div className="flex gap-4 justify-center mt-8">
-                    <div className="stat border border-lime-800 rounded-2xl mx-auto">
-                        <div className="stat-title text-center"> Total Users</div>
-                        <div className="stat-value text-primary flex gap-3 mx-auto"><FaUsers></FaUsers>{information?.users}</div>
-                        <div className="stat-desc text-center">21% more than last month</div>
+        <div className="mx-10 my-12">
+            {/* Dashboard content */}
+            <div className="flex flex-wrap gap-6">
+                {dashboardItems.map((item, index) => (
+                    <div key={index} className="max-w-64 max-h-48 bg-purple-100 shadow-lg hover:scale-105 group rounded-lg ">
+                        <item.icon className="mx-auto mt-6 text-4xl text-[#2b2b38] group-hover:text-primary " />
+                        <h1 className="text-[#2b2b38] group-hover:text-primary font-bold p-6 py-2 text-2xl text-center">
+                            {item.text}: {item.count}
+                        </h1>
                     </div>
-                    <div className="stat border border-lime-800 rounded-2xl  mx-auto">
-                        <div className="stat-title text-center"> Total Camp</div>
-                        <div className="stat-value text-primary flex gap-3 mx-auto"><CiMedicalCase></CiMedicalCase> {information?.camps}</div>
-                        <div className="stat-desc text-center">21% more than last month</div>
-                    </div>
-                    <div className="stat border border-lime-800 rounded-2xl  mx-auto">
-                        <div className="stat-title text-center"> Total Registered Camp</div>
-                        <div className="stat-value text-primary flex gap-3 mx-auto items-center"><FaHouseMedicalCircleCheck></FaHouseMedicalCircleCheck> {information?.registeredCamps}</div>
-                        <div className="stat-desc text-center">21% more than last month</div>
-                    </div>
-                    <div className="stat border border-lime-800 rounded-2xl mx-auto">
-                        <div className="stat-title text-center"> Total Payments</div>
-                        <div className="stat-value text-primary flex gap-3 mx-auto items-center"><MdPayment></MdPayment> {information?.payments}</div>
-                        <div className="stat-desc text-center">21% more than last month</div>
-                    </div>
-                </div>
-            </div>
-            <div className="flex w-full justify-center mt-4">
-                <div className="w-full">
-                    <BarChart
-                        width={900}
-                        height={500}
-                        data={data}
-                        margin={{
-                            top: 20,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Bar dataKey="uv" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
-                            {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={colors[index % 4]} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </div>
-                
+                ))}
             </div>
         </div>
     );

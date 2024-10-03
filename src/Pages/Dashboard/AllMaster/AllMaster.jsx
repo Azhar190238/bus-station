@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 import Swal from 'sweetalert2';
 
-const AllUsers = () => {
+const AllMaster = () => {
     const [users, setUsers] = useState([]);
 
     // Fetch users from the server when the component mounts
@@ -55,7 +56,7 @@ const AllUsers = () => {
     };
 
     // Filter users to show only members
-    const memberUsers = users.filter(user => user.role === "member");
+    const memberUsers = users.filter(user => user.role === "master");
 
     return (
         <>
@@ -74,6 +75,7 @@ const AllUsers = () => {
                                 <th className="px-4 py-2">Phone Number</th>
                                 <th className="px-4 py-2">Location</th>
                                 <th className="px-4 py-2">Role</th>
+                                <th className="px-4 py-2">Update</th>
                                 <th className="px-4 py-2">Delete</th>
                             </tr>
                         </thead>
@@ -85,7 +87,8 @@ const AllUsers = () => {
                                     <td className="px-4 py-2">{user.phone}</td>
                                     <td className="px-4 py-2">{user.location}</td>
                                     <td className="px-4 py-2">{user.role}</td>
-                                    <td className="px-4 py-2">
+                                    <td className="pl-8 py-2"><MdOutlineSystemUpdateAlt className="text-xl text-primary " /></td>
+                                    <td className="pl-8 py-2">
                                         <button
                                             onClick={() => handleDelete(user)}
                                             className="btn btn-ghost btn-sm"
@@ -103,4 +106,4 @@ const AllUsers = () => {
     );
 };
 
-export default AllUsers;
+export default AllMaster;

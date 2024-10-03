@@ -4,8 +4,8 @@ import {
 
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
-import Login from "../Authentication/Login/Login";
-import SignUp from "../Authentication/SignUp/SignUp";
+// import Login from "../Authentication/Login/Login";
+// import SignUp from "../Authentication/SignUp/SignUp";
 import ContactPage from "../Pages/Contact/ContactPage";
 import About from "../Pages/About/About";
 import AllFaq from "../Pages/FAQ/AllFaq";
@@ -19,8 +19,13 @@ import Dashboard from "../Layout/Dashboard";
 // import ManageCamp from "../Pages/Dashboard/ManageCamp/ManageCamp";
 // import ManageRegisteredCamp from "../Pages/Dashboard/ManageRegisteredCamp/ManageRegisteredCamp";
 // import UpdateCamp from "../Pages/Dashboard/UpdateCamp/UpdateCamp";
-import Profile from "../Pages/Dashboard/Profile/Profile";
+// import Profile from "../Pages/Dashboard/Profile/Profile";
 import AllService from "../Pages/Service/AllService";
+import Login from "../Authentication/Login/Login";
+import SignUp from "../Authentication/SignUp/SignUp";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AllMaster from "../Pages/Dashboard/AllMaster/AllMaster";
 // import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
 // import RegisteredCamp from "../Pages/Dashboard/RegisteredCamp/RegisteredCamp";
 // import Payment from "../Pages/Dashboard/Payment/Payment";
@@ -82,11 +87,11 @@ export const router = createBrowserRouter([
     children: [
       // general user can access
       
-      {
-        path: 'profile',
-        // element: <PrivateRoute> <Profile></Profile> </PrivateRoute>
-        element:  <Profile></Profile> 
-      },
+      // {
+      //   path: 'profile',
+      //   // element: <PrivateRoute> <Profile></Profile> </PrivateRoute>
+      //   element:  <Profile></Profile> 
+      // },
   //     {
   //       path: 'registeredCamp',
   //       element: <PrivateRoute> <RegisteredCamp></RegisteredCamp> </PrivateRoute>
@@ -103,14 +108,18 @@ export const router = createBrowserRouter([
   //     },
 
   //     // Only Admin can access
-  //     {
-  //       path: 'adminHome',
-  //       element: <AdminHome></AdminHome>
-  //     },
-  //     {
-  //       path: 'allUsers',
-  //       element: <AllUsers></AllUsers>
-  //     },
+      {
+        path: 'adminHome',
+        element: <AdminHome></AdminHome>
+      },
+      {
+        path: 'allUsers',
+        element: <AllUsers></AllUsers>
+      },
+      {
+        path: 'allMaster',
+        element: <AllMaster></AllMaster>
+      },
   //     {
   //       path: 'addCamp',
   //       element: <AddCamp></AddCamp>
