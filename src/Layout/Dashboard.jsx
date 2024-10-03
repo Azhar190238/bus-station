@@ -24,13 +24,13 @@ const Dashboard = () => {
     return (
         <div className="flex">
             {/* Sidebar */}
-            <div className={`w-72 min-h-screen bg-[#954917e0] p-4 sm:block ${isMenuOpen ? 'block absolute top-0 left-0' : 'hidden'} sm:relative`}>
+            <div className={`w-72 min-h-screen bg-[#E675291A] p-4 sm:block ${isMenuOpen ? 'block absolute top-0 left-0' : 'hidden'} sm:relative`}>
                 <ul className="menu space-y-4 mt-10">
                     {navItems.map((item, index) => (
                         <li key={index} className="p-1 uppercase">
                             <NavLink 
                                 to={item.to}
-                                className={({ isActive }) => `flex items-center space-x-2 p-2 ${isActive ? ' text-white' : 'text-[#2b2b38]'}`}>
+                                className={({ isActive }) => `flex items-center space-x-2 p-2 ${isActive ? ' text-white bg-primary p-2 rounded' : 'text-[#2b2b38]'}`}>
                                 <item.icon />
                                 <span>{item.label}</span>
                             </NavLink>
