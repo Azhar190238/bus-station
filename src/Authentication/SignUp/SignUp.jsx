@@ -6,19 +6,15 @@ import logo from '../../assets/logo.png'
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
-
 const SignUp = () => {
     const navigate = useNavigate();
     const axiosSecurePublic = useAxiosPublic();
 
-
-    // Individual states for each field
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [location, setLocation] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [otp, setOtp] = useState(''); // State to store OTP input
 
     const [role, setRole] = useState('member');
     const [active, setActive] = useState('member');
@@ -41,21 +37,19 @@ const SignUp = () => {
         try {
             const response = await axiosSecurePublic.post('/users', newUser);
 
-            // Check for success status
+            console.log(response)
             if (response.status === 200) {
-                // Success message
+                
                 Swal.fire({
                     icon: 'success',
-                    title: 'Registration successful',
-                    showConfirmButton: false,
-                    timer: 2000
+                    title: 'Sign Up successful',
+                    showConfirmButton: true,
+                    text:'Please Login Now'
                 });
-                // Navigate to home page or desired route
-                navigate('/');
+                navigate('/login');
             }
 
         } catch (error) {
-            // Check if the user already exists (status 409)
             if (error.response && error.response.status === 409) {
                 Swal.fire({
                     icon: 'warning',
@@ -64,7 +58,6 @@ const SignUp = () => {
                     showConfirmButton: true
                 });
             } else {
-                // General error message
                 Swal.fire({
                     icon: 'error',
                     title: 'Registration failed',
@@ -74,32 +67,8 @@ const SignUp = () => {
 
             console.error('Error:', error);
         }
-
-        // Reset the form
         form.resetFields();
     };
-
-
-
-    // Log phone number when 'Send OTP' button is clicked
-    const handleSendOtp = () => {
-        console.log('Phone:', phone);
-    };
-
-    // Log OTP when 'Verify OTP' button is clicked
-    const handleVerifyOtp = () => {
-        console.log('OTP:', otp); // Log the OTP value stored in the state
-    };
-
-    const onChange = (otpValue) => {
-        setOtp(otpValue); // Update OTP state
-        console.log('onChange:', otpValue); // Log OTP as it changes
-    };
-
-    const sharedProps = {
-        onChange, // Handle OTP change here
-    };
-
 
     return (
         <div>
@@ -132,7 +101,6 @@ const SignUp = () => {
                                             className="p-4"
                                             onChange={(e) => {
                                                 setName(e.target.value);
-                                                console.log('Name:', e.target.value);
                                             }}
                                         />
                                     </Form.Item>
@@ -147,7 +115,6 @@ const SignUp = () => {
                                             className="p-4"
                                             onChange={(e) => {
                                                 setPhone(e.target.value);
-                                                console.log('Phone:', e.target.value);
                                             }}
                                         />
                                     </Form.Item>
@@ -162,7 +129,6 @@ const SignUp = () => {
                                             className="p-4"
                                             onChange={(e) => {
                                                 setLocation(e.target.value);
-                                                console.log('Location:', e.target.value);
                                             }}
                                         />
                                     </Form.Item>
@@ -177,7 +143,6 @@ const SignUp = () => {
                                             className="p-4"
                                             onChange={(e) => {
                                                 setPassword(e.target.value);
-                                                console.log('Password:', e.target.value);
                                             }}
                                         />
                                     </Form.Item>
@@ -207,13 +172,12 @@ const SignUp = () => {
                                             className="p-4"
                                             onChange={(e) => {
                                                 setConfirmPassword(e.target.value);
-                                                console.log('Confirm Password:', e.target.value);
                                             }}
                                         />
                                     </Form.Item>
                                     <button type="submit" className="button w-full !mt-10 !rounded-md">Sign In</button>
                                 </Form>
-                                <p className="mt-4 text-center">Have an account? <Link to="/login" className="underline text-primary font-bold">Sign Up</Link></p>
+                                <p className="mt-4 text-center">Have an account? <Link to="/login" className="underline text-primary font-bold">Log In</Link></p>
                             </div>
                         </div>
                     </div>

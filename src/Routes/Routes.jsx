@@ -4,41 +4,30 @@ import {
 
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
-// import Login from "../Authentication/Login/Login";
-// import SignUp from "../Authentication/SignUp/SignUp";
-import ContactPage from "../Pages/Contact/ContactPage";
-import About from "../Pages/About/About";
-import AllFaq from "../Pages/FAQ/AllFaq";
-// import Register from "../Authentication/Register";
-import Dashboard from "../Layout/Dashboard";
-// import PrivateRoute from "../Providers/PrivateRoute"
-// import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
-// import AddCamp from "../Pages/Dashboard/AddCamp/AddCamp";
-// import CampDetails from "../Pages/Home/Camp/CampDetails";
-// import JoinCamp from "../Pages/Home/Camp/JoinCamp";
-// import ManageCamp from "../Pages/Dashboard/ManageCamp/ManageCamp";
-// import ManageRegisteredCamp from "../Pages/Dashboard/ManageRegisteredCamp/ManageRegisteredCamp";
-// import UpdateCamp from "../Pages/Dashboard/UpdateCamp/UpdateCamp";
-// import Profile from "../Pages/Dashboard/Profile/Profile";
-import AllService from "../Pages/Service/AllService";
 import Login from "../Authentication/Login/Login";
 import SignUp from "../Authentication/SignUp/SignUp";
+import ProtectedLogin from "../Authentication/ProtectLogin/ProtectedLogin";
+import AllService from "../Pages/Service/AllService";
+import About from "../Pages/About/About";
+import AllFaq from "../Pages/FAQ/AllFaq";
+import ContactPage from "../Pages/Contact/ContactPage";
+import ProtectedAdmin from "../Authentication/ProtectedAdmin/ProtectedAdmin";
+import Dashboard from "../Layout/Dashboard";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllMaster from "../Pages/Dashboard/AllMaster/AllMaster";
-// import UpdateProfile from "../Pages/Dashboard/UpdateProfile/UpdateProfile";
-// import RegisteredCamp from "../Pages/Dashboard/RegisteredCamp/RegisteredCamp";
-// import Payment from "../Pages/Dashboard/Payment/Payment";
-// // import AvailableCamp from "../Pages/AvailableCamp/AvailableCamp";
-// import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
-// import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
-
+import ForgetPassword from "../Authentication/forgatpassword/ForgetPawwsord";
+import ResetPassword from "../Authentication/ResetPassword/ResetPassword";
+import ManageBus from "../Pages/Dashboard/ManageBus/ManageBus";
+import AddBus from "../Pages/Dashboard/AddBus/AddBus";
+import AddRoute from "../Pages/Dashboard/AddRoute/AddRoute";
+import Profile from "../Pages/Dashboard/Profile/Profile";
+import RouteManage from "../Pages/Dashboard/RouteManage/RouteManage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement:'',
     children: [
       {
         path: '/',
@@ -46,108 +35,75 @@ export const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login/>
+        element: <ProtectedLogin> <Login /> </ProtectedLogin>
       },
+
       {
         path: '/signup',
-        element: <SignUp/>
+        element: <SignUp />
       },
+      {
+        path: '/service/:id', 
+        element: <AllService />
+    },
       {
         path: '/about',
-        element: <About/>
-      },
-      {
-        path: '/service',
-        element: <AllService/>
+        element: <About />
       },
       {
         path: '/faq',
-        element: <AllFaq/>
+        element: <AllFaq />
       },
       {
         path: '/contact',
-        element: <ContactPage/>
+        element: <ContactPage />
+      },
+      {
+        path: '/forgetPassword',
+        element: <ForgetPassword/>
+      },
+      {
+        path: '/resetPassword/:token',
+        element: <ResetPassword/>
       }
-      // {
-      //   path: '/campDetails/:id',
-      //   element: <PrivateRoute> <CampDetails></CampDetails></PrivateRoute>,
-      //   loader: ({params}) => fetch(`https://server-site-lilac.vercel.app/singleCamp/${params.id}`)
-      // },
-      // {
-      //   path: '/joinCamp/:id',
-      //   element: <JoinCamp></JoinCamp>,
-      //   loader: ({params}) => fetch(`https://server-site-lilac.vercel.app/joinCamp/${params.id}`)
-      // }
     ]
   },
   {
     path: 'dashboard',
-    // element:  <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
-    element: <Dashboard></Dashboard>,
+    element: <ProtectedAdmin> <Dashboard /> </ProtectedAdmin>,
+    //  Only admin can access
     children: [
-      // general user can access
-      
-      // {
-      //   path: 'profile',
-      //   // element: <PrivateRoute> <Profile></Profile> </PrivateRoute>
-      //   element:  <Profile></Profile> 
-      // },
-  //     {
-  //       path: 'registeredCamp',
-  //       element: <PrivateRoute> <RegisteredCamp></RegisteredCamp> </PrivateRoute>
-  //     },
-      
-  //     {
-  //       path: 'paymentHistory',
-  //       element: <PrivateRoute> <PaymentHistory></PaymentHistory> </PrivateRoute>
-  //     },
-  //     {
-  //       path: 'payment/:id',
-  //       element: <PrivateRoute> <Payment></Payment> </PrivateRoute>,
-  //       loader: ({params}) => fetch(`https://server-site-lilac.vercel.app/camp/${params.id}`)
-  //     },
-
-  //     // Only Admin can access
       {
         path: 'adminHome',
-        element: <AdminHome></AdminHome>
+        element: <AdminHome />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       },
       {
         path: 'allUsers',
-        element: <AllUsers></AllUsers>
+        element: <AllUsers />
       },
       {
         path: 'allMaster',
-        element: <AllMaster></AllMaster>
+        element: <AllMaster/>
       },
-  //     {
-  //       path: 'addCamp',
-  //       element: <AddCamp></AddCamp>
-  //     },
-  //     {
-  //       path: 'manageCamp',
-  //       element: <ManageCamp></ManageCamp>
-  //     },
-  //     {
-  //       path: 'manageRegisteredCamp',
-  //       element: <ManageRegisteredCamp></ManageRegisteredCamp>
-  //     },
-  //     {
-  //       path: 'profile',
-  //       element: <Profile></Profile>
-  //     },
-  //     {
-  //       // updateCamp
-  //       path: 'updateCamp/:id',
-  //       element: <UpdateCamp></UpdateCamp>,
-  //       loader: ({params}) => fetch(`https://server-site-lilac.vercel.app/updateCamp/${params.id}`)
-  //     },
-  //     {
-  //       // updateCamp
-  //       path: 'updateProfile/:email',
-  //       element: <UpdateProfile></UpdateProfile>,
-  //       loader: ({params}) => fetch(`https://server-site-lilac.vercel.app/updateProfile/${params.email}`)
-  //     }
-   ]
-   }
-]);
+      {
+        path: 'addBus',
+        element: <AddBus/>
+      },
+      {
+        path: 'manageBus',
+        element: <ManageBus/>
+      },
+      {
+        path: 'addRoute',
+        element: <AddRoute/>
+      },
+      {
+        path: 'routeManage',
+        element: <RouteManage/>
+      },
+    ]
+  }])

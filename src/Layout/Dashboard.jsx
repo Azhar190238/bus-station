@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FaBook, FaHome, FaList, FaUser, FaUsers, FaUtensils, FaBars, FaTimes } from "react-icons/fa";
-import { GiPoliceOfficerHead } from "react-icons/gi";
+import { FaBook, FaHome,  FaUser, FaUsers,  FaBars, FaTimes, FaBus } from "react-icons/fa";
+import { GiBus, GiPoliceOfficerHead } from "react-icons/gi";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -13,9 +13,10 @@ const Dashboard = () => {
     const navItems = [
         { to: '/dashboard/adminHome', label: 'Admin Home', icon: FaHome },
         { to: '/dashboard/profile', label: 'Profile', icon: FaUser },
-        { to: '/dashboard/addCamp', label: 'Add A Camp', icon: FaUtensils },
-        { to: '/dashboard/manageCamp', label: 'Manage Camp', icon: FaList },
-        { to: '/dashboard/manageRegisteredCamp', label: 'Manage Registered Camp', icon: FaBook },
+        { to: '/dashboard/addBus', label: 'Add A Bus', icon: FaBus  },
+        { to: '/dashboard/manageBus', label: 'Manage Bus', icon: GiBus },
+        { to: '/dashboard/addRoute', label: 'Add Route', icon: FaBook },
+        { to: '/dashboard/routeManage', label: 'Route Management', icon: FaBook },
         { to: '/dashboard/allUsers', label: 'All Users Management', icon: FaUsers },
         { to: '/dashboard/allMaster', label: 'All Master Management', icon: GiPoliceOfficerHead },
         { to: '/', label: 'Home', icon: FaHome },
@@ -31,7 +32,7 @@ const Dashboard = () => {
                             <NavLink 
                                 to={item.to}
                                 className={({ isActive }) => `flex items-center space-x-2 p-2 ${isActive ? ' text-white bg-primary p-2 rounded' : 'text-[#2b2b38]'}`}>
-                                <item.icon />
+                                <item.icon className="text-xl" />
                                 <span>{item.label}</span>
                             </NavLink>
                         </li>

@@ -1,24 +1,40 @@
+import { useEffect, useState } from 'react';
 import ServiceCard from '../../Card/ServiceCard';
-import card1 from '../../../assets/service/card1.png';
-import card2 from '../../../assets/service/card2.png';
 import SectionHeader from '../../Shared-file/SectionHeader';
-const serviceData = [
-    {
-        _id: 1,
-        restTime: '11 Hours',
-        availableSeat: 30,
-        image: card1
-    },
-    {
-        _id: 2,
-        restTime: '6 Hours',
-        availableSeat: 40,
-        image: card2
-    },
-
-];
 
 const LatestService = () => {
+    const [serviceData, setServiceData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchServiceData = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/buses'); // Replace with your actual API endpoint
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setServiceData(data);
+            } catch (err) {
+                console.error('Error fetching service data:', err);
+                setError('Failed to load services.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchServiceData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>; // You can customize the loading state
+    }
+
+    if (error) {
+        return <div>{error}</div>; // Handle any errors that occurred during fetching
+    }
+
     return (
         <section className='bus-container'>
             <SectionHeader
@@ -26,24 +42,31 @@ const LatestService = () => {
                 description="BRTC Paribahan delivers reliable bus services with a focus on comfort and safety, ensuring seamless travel to your destinations"
             />
             <div className='section-gap'>
-                {serviceData.length == 2 ?
+                {serviceData.length === 2 ? (
                     <div className='flex flex-col md:flex-row w-full gap-10'>
-                        {
-                            serviceData.map((service) => (
-                                <ServiceCard key={service._id} restTime={service.restTime} availableSeat={service.availableSeat} img={service.image} />
-                            ))
-                        }
-                    </div> :
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-20 w-full gap-8'>
-                        {
-                            serviceData.map((service) => (
-                                <ServiceCard key={service._id} restTime={service.restTime} availableSeat={service.availableSeat} img={service.image} />
-                            ))
-                        }
+                        {serviceData.map((service) => (
+                            <ServiceCard
+                                key={service._id}
+                                startTime={service.startTime}
+                                availableSeat={service.totalSeats}
+                                img={service.imageUrl}
+                                _id={service._id}
+                            />
+                        ))}
                     </div>
-                }
+                ) : (
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 w-full gap-8'>
+                        {serviceData.map((service) => (
+                            <ServiceCard
+                                key={service._id}
+                                startTime={service.startTime}
+                                availableSeat={service.totalSeats}
+                                img={service.imageUrl}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
-
         </section>
     );
 };

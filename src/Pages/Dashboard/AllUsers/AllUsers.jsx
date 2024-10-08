@@ -4,8 +4,8 @@ import Swal from 'sweetalert2';
 
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
-
-    // Fetch users from the server when the component mounts
+    const [currentPage, setCurrentPage] = useState(1);
+    const [usersPerPage] = useState(12);
     useEffect(() => {
         fetch('http://localhost:5000/users')
             .then(response => response.json())
@@ -13,7 +13,6 @@ const AllUsers = () => {
             .catch(error => console.error("Error fetching users:", error));
     }, []);
 
-    // Handle deleting a user
     const handleDelete = (user) => {
         Swal.fire({
             title: "Are you sure?",
@@ -25,37 +24,45 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
+                const token = localStorage.getItem('token')
                 fetch(`http://localhost:5000/users/${user._id}`, {
                     method: "DELETE",
                     headers: {
-                      'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // Add Authorization header
                     },
-                  })
+
+                })
                     .then(response => response.json())
                     .then(result => {
-                      console.log('Delete result:', result);  // Log result for debugging
-                      if (result.deletedCount > 0) {
-                        Swal.fire({
-                          title: "Deleted!",
-                          text: `${user.name} has been deleted.`,
-                          icon: "success"
-                        });
-                        setUsers(prevUsers => prevUsers.filter(u => u._id !== user._id));
-                      } else {
-                        Swal.fire({
-                          title: "Error!",
-                          text: "Failed to delete user",
-                          icon: "error"
-                        });
-                      }
+                        console.log('Delete result:', result);
+                        if (result.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `${user.name} has been deleted.`,
+                                icon: "success"
+                            });
+                            setUsers(prevUsers => prevUsers.filter(u => u._id !== user._id));
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Failed to delete user",
+                                icon: "error"
+                            });
+                        }
                     })
-                    .catch(error => console.error("Error deleting user:", error));                  
+                    .catch(error => console.error("Error deleting user:", error));
             }
         });
     };
 
-    // Filter users to show only members
     const memberUsers = users.filter(user => user.role === "member");
+
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = memberUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    const totalPages = Math.ceil(memberUsers.length / usersPerPage);
 
     return (
         <>
@@ -78,9 +85,9 @@ const AllUsers = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {memberUsers.map((user, index) => (
+                            {currentUsers.map((user, index) => (
                                 <tr key={user._id}>
-                                    <td className="px-4 py-2">{index + 1}</td>
+                                    <td className="px-4 py-2">{index + indexOfFirstUser + 1}</td>
                                     <td className="px-4 py-2">{user.name}</td>
                                     <td className="px-4 py-2">{user.phone}</td>
                                     <td className="px-4 py-2">{user.location}</td>
@@ -97,6 +104,18 @@ const AllUsers = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
+
+                <div className="flex justify-center mt-4">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index + 1}
+                            onClick={() => setCurrentPage(index + 1)}
+                            className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-primary text-white' : 'bg-gray-300 text-black'}`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
                 </div>
             </div>
         </>

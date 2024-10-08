@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecurePublic = axios.create({
-    baseURL: 'https://server-site-lilac.vercel.app'
+    baseURL: 'http://localhost:5000/'
 })
 const useAxiosPublic = () => {
     return axiosSecurePublic
